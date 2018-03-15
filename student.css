@@ -1,0 +1,11 @@
+.contents {
+  background-color: lightgrey;
+}
+.contents, .contents-items {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+.width20 {
+  width: 20%;
+}
