@@ -3,9 +3,31 @@
 }
 .contents, .contents-items {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border-bottom: 1px solid gray;
 }
+
 .width20 {
   width: 20%;
+}
+
+.wrapper{
+  border: 1px solid red;
+  width: 30%;
+}
+
+.main{
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 550px) {
+  .wrapper{
+    width: 100%;
+    margin-bottom: 5%;
+  }
 }

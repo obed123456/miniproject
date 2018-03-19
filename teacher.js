@@ -14,21 +14,43 @@ let student = [
   ];
 
 let classes = [{
-  name: 'street',
+  name: 'Street',
   dates: ['2018-03-16', '2018-03-23', '2018-03-30'],
   start: '18.00',
   length: 2,
-  }, {
-  name: 'tango',
+  },
+  {
+  name: 'Tango',
   dates: ['2018-03-19', '2018-03-22', '2018-03-29'],
   start: '18.00',
   length: 2,
-  }, {
+  },
+  {
   name: 'Dancehall',
   dates: ['2018-03-18', '2018-03-21', '2018-03-31'],
   start: '18.00',
   length: 2,
-  }];
+  }
+];
+console.log(student.length);
+var tango = classes.findIndex(x => x.name=="Tango");
+var dancehall = classes.findIndex(x => x.name=="Dancehall");
+var street = classes.findIndex(x => x.name=="Street");
+
+
+document.getElementById('street').innerHTML = classes[street].name ;
+document.getElementById('tango').innerHTML = classes[tango].name ;
+document.getElementById('dancehall').innerHTML = classes[dancehall].name ;
+
+var date = '<div>';
+
+// classesOfdance.forEach(classdates => {
+  date += '<p>' + `${classes[street].start}` + '</p>';
+  // <div>`${tango.start}`<div>
+// });
+ document.getElementById('street-li').innerHTML = date;
+
+
 
 //this function is a exemple to sort all dates
 //only dates which are higher then or equal to day will show in the list
@@ -44,9 +66,7 @@ console.log(todaysDate[i]);
 let div;
 let element;
 
-var tango = classes.findIndex(x => x.name=="tango");
-var dancehall = classes.findIndex(x => x.name=="Dancehall");
-var street = classes.findIndex(x => x.name=="street");
+
 
 var today = new Date();
 var dd = today.getDate();
@@ -69,15 +89,15 @@ console.log(tangoObj.start);
 var classesOfdance = tangoObj.dates;
 console.log(classesOfdance);
 var str = '<ul>';
-var time = '<ul>'
+var time = '<div>'
 
 classesOfdance.forEach(classdates => {
-  str += '<li>' + classdates + '</li>';
-  time += '<li>' + `${tangoObj.start}` + '</li>';
+
+  time += '<p>' + `${tangoObj.start}` + '</p>';
   // <div>`${tango.start}`<div>
 });
- document.getElementById('dates').innerHTML = str;
-  document.getElementById('time').innerHTML = time;
+document.getElementById('dates').innerHTML = str;
+document.getElementById('time').innerHTML = time;
 //loop through all dates in array of tango and then print in a list.
 // for( var i = 0; i <classesOfdance.length; i++){
 //   console.log(classesOfdance[i]);
@@ -138,13 +158,11 @@ for(var i = 0; i < student.length; i++) {
 
   div = document.createElement("div");
   div.setAttribute('class', 'width20');
-  element = document.getElementById('student');
+  element = document.getElementById('street');
   element.appendChild(div);
   var node = document.createElement('p');
   node.setAttribute('id', 'firstname');
   var chnode = document.createTextNode(firstname);
   div.appendChild(node);
   node.appendChild(chnode);
-
-
 }
