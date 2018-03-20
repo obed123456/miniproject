@@ -55,7 +55,7 @@ document.getElementById('street').innerHTML = classes[street].name ;
 document.getElementById('tango').innerHTML = classes[tango].name ;
 document.getElementById('dancehall').innerHTML = classes[dancehall].name ;
 
-var date = '<div>';
+var date = '<div>';2
 
 // classesOfdance.forEach(classdates => {
   date += '<p>' + `${classes[street].start}` + '</p>';
@@ -89,7 +89,7 @@ function classDates(index, pos) {
 
 }
 
-classDates(tango, );
+classDates(street, 'dates');
 
 let div;
 let element;
