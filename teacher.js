@@ -89,7 +89,7 @@ function classDates(index, pos) {
 
 }
 
-classDates(tango, );
+classDates(tango, 'dates');
 
 let div;
 let element;
