@@ -9,7 +9,13 @@
   "author": "Anton Bäckström",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.18.2",
     "express": "^4.16.2"
+=======
+    "body-parser": "*",
+    "express": "*",
+    "mysql": "*"
+>>>>>>> a7c9cac3f81512d35147acddf2f74d7d73323f8e
   }
 }

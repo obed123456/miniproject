@@ -3,21 +3,29 @@ let student = [
   firstname: 'Lisa',
   lastname: 'LaFlamme',
   age: 21,
-  classes: ['street', 'dancehall', 'balett', 'Tango']
+  classes: ['street']
   },
   {
   firstname: 'Rolf',
   lastname: 'Eriksson',
   age: 55,
-  classes: ['street', 'dancehall', 'balett', 'Tango']
+  classes: ['street', 'dancehall']
   }
   ];
+
+for(var i = 0; i < student.length; i++){
+  var count = 0;
+if(student[i].classes[i] === 'street'){
+console.log(student[i].classes[i]);
+}
+
+}
 
 let classes = [{
   name: 'Street',
   dates: ['2018-03-16', '2018-03-23', '2018-03-30'],
   start: '18.00',
-  length: 2,
+  length: 3,
   },
   {
   name: 'Tango',
@@ -28,11 +36,11 @@ let classes = [{
   {
   name: 'Dancehall',
   dates: ['2018-03-18', '2018-03-21', '2018-03-31'],
-  start: '18.00',
+  start: '19.00',
   length: 2,
   }
 ];
-
+console.log(classes[0].dates.length);
 
 var today = new Date();
 var dd = today.getDate();
@@ -67,35 +75,65 @@ var date = '<div>';2
 console.log(classes[street].dates);
 //this function is a exemple to sort all dates
 //only dates which are higher then or equal to day will show in the list
-function classDates(index, pos) {
-  var items =  document.getElementById(pos);
+function classDates(index, id) {
+  var items =  document.getElementById(id);
   items.innerHTML = '';
   var date1 = todaysDate;
   console.log(date1);
   var allDates = classes[index].dates;
-  console.log(allDates);
+  console.log(allDates.length);
 
   for (var i = 0; i < allDates.length; i++) {
   allDates.sort();
   if(allDates[i] >= date1){
   // document.getElementById(pos).innerHTML = allDates[i];
-  console.log(allDates[i]);
+
   var datesoutput = document.createElement('p');
   datesoutput.innerHTML = allDates[i];
   items.appendChild(datesoutput);
-
   }
   }
-
+}
+var TimeDuration = function (index, id) {
+  let starttime = classes[index].start;
+  document.getElementById(id).innerHTML = "Classes starts at: " + starttime;
 }
 
-classDates(street, 'dates');
+var totalDuration = function (index, id) {
+  let total = classes[index].length;
+  document.getElementById(id).innerHTML = "Total duration is : " + total;
+}
+
+totalDuration(tango, 'tango-length');
+totalDuration(street, 'street-length');
+totalDuration(dancehall, 'dancehall-length');
+
+TimeDuration(tango, 'tango-time');
+TimeDuration(street, 'street-time');
+TimeDuration(dancehall, 'dancehall-time');
+
+classDates(street, 'street-dates');
+classDates(tango, 'tango-dates');
+classDates(dancehall, 'dancehall-dates');
+
 
 let div;
 let element;
 
+function studentCount(student, index) {
+  for(var i = 0; i < student.length; i++) {
 
+    if(student[index].classes === 'street') {
+      console.log('We found street');
+    }
+    else {
+      console.log('fuck it');
+    }
+    // document.getElementById(id) = student[index].length;
+  }
+}
 
+student(tango);
 
 // console.log(today.gettime());
 //save tango object here
