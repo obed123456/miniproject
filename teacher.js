@@ -1,17 +1,28 @@
-let student = [
-  {
-  firstname: 'Lisa',
-  lastname: 'LaFlamme',
-  age: 21,
-  classes: ['street']
-  },
-  {
-  firstname: 'Rolf',
-  lastname: 'Eriksson',
-  age: 55,
-  classes: ['street', 'dancehall']
-  }
-  ];
+fetch('http://localhost:3080/api/getallclasseswithname')
+.then(function(response) {
+  if(response.ok) {
+    response.json()
+  .then(function(json) {
+    var allclasses = json;
+    console.log(allclasses[0].Users.sFname);
+  let output = '<h2 class="mb-4">All Classes</h2>';
+  allclasses.forEach(function(user){
+    output += `
+    <table class="table">
+      <tbody>
+        <tr>
+          <td scope="row">${user.sFname}</td>
+        </tr>
+      </tbody>
+    </table>
+              `;
+  });
+  document.getElementById('street-students').innerHTML = output;
+})
+}
+});
+
+
 
 for(var i = 0; i < student.length; i++){
   var count = 0;
@@ -21,25 +32,6 @@ console.log(student[i].classes[i]);
 
 }
 
-let classes = [{
-  name: 'Street',
-  dates: ['2018-03-16', '2018-03-23', '2018-03-30'],
-  start: '18.00',
-  length: 3,
-  },
-  {
-  name: 'Tango',
-  dates: ['2018-03-19', '2018-03-22', '2018-03-29'],
-  start: '18.00',
-  length: 2,
-  },
-  {
-  name: 'Dancehall',
-  dates: ['2018-03-18', '2018-03-21', '2018-03-31'],
-  start: '19.00',
-  length: 2,
-  }
-];
 console.log(classes[0].dates.length);
 
 var today = new Date();
