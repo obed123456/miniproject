@@ -3,15 +3,70 @@ fetch('http://localhost:3080/api/getallclasseswithname')
   if(response.ok) {
     response.json()
   .then(function(json) {
-    var allclasses = json;
-    console.log(allclasses[0].Users.sFname);
-  let output = '<h2 class="mb-4">All Classes</h2>';
+    var allclasses = json; // all objects 
+    console.log(allclasses);
+
+
+function removeDuplicates(arr, classes){
+
+    let unique_classes = [];
+    let unique_array = [];
+    //this will filter only one class
+    for(let i = 0;i < arr.length; i++){
+      if(arr[i].danceClasses === classes){
+        var newArr = arr[i]; 
+        unique_classes.push(newArr);
+        console.log(unique_classes.length);
+
+      }
+
+      function foo(arr){
+        var a =[], b =[], prev; 
+        var c = [];
+        arr.sort(); 
+        for (var i = 0; i < arr.length; i++){
+          let newdates = c.push(arr[i].date);
+          console.log(newdates[i]);
+          if(arr[i].date !== prev){
+            a.push(arr[i]); 
+            b.push(1); 
+          } else {
+            b[b.length-1]++; 
+          }
+          prev = arr[i]; 
+        }
+        return [a,b];
+      }
+
+      var result = foo(unique_classes); 
+      console.log(result);
+
+
+      
+      //this function will remove duplicate dates
+      for ( let i = 0; i < unique_classes.length; i++){
+        if(unique_array.indexOf(unique_classes[i].date) == -1){
+          var uniq_dates = unique_classes[i].date;
+          var uniq_time = unique_classes[i].danceClasses;
+          unique_array.push(unique_classes[i].date)
+      } 
+      }
+
+    }
+    return unique_array
+}
+
+console.log(removeDuplicates(allclasses, 'Street'));
+
+
+let output = '<h2 class="mb-4">All Classes</h2>';
   allclasses.forEach(function(user){
     output += `
     <table class="table">
       <tbody>
         <tr>
-          <td scope="row">${user.sFname}</td>
+          <td scope="row">${user.date}</td>
+          <td scope="row">${user.start}</td>
         </tr>
       </tbody>
     </table>

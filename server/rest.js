@@ -82,7 +82,7 @@ router.get("/getallclasseswithname",function(req,res){
           throw (err);
             // res.json({"Error" : true, "Message" : "Error executing MySQL query"});
         } else {
-            res.json({"Users": rows});
+            res.json(rows);
         }
     });
 });
