@@ -20,27 +20,15 @@ function removeDuplicates(arr, classes){
 
       }
 
-      function foo(arr){
-        var a =[], b =[], prev; 
-        var c = [];
-        arr.sort(); 
-        for (var i = 0; i < arr.length; i++){
-          let newdates = c.push(arr[i].date);
-          console.log(newdates[i]);
-          if(arr[i].date !== prev){
-            a.push(arr[i]); 
-            b.push(1); 
-          } else {
-            b[b.length-1]++; 
-          }
-          prev = arr[i]; 
-        }
-        return [a,b];
+      var arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
+      var counts = {};
+      
+      for (var i = 0; i < arr.length; i++) {
+       var num = arr[i];
+       counts[num] = counts[num] ? counts[num] + 1 : 1;
       }
-
-      var result = foo(unique_classes); 
-      console.log(result);
-
+      
+      console.log(counts[5], counts[2], counts[9], counts[4]);
 
       
       //this function will remove duplicate dates
