@@ -6,6 +6,40 @@ fetch('http://localhost:3080/api/getallclasseswithname')
     var allclasses = json; // all objects 
     console.log(allclasses);
 
+//this function will remove dubble and calucate total students per class. 
+    function calucateStudents(arr, danceClass) {
+       var a = [], b = [], prev;       
+       arr.sort();
+       for ( var i = 0; i < arr.length; i++ ) {   
+           if ( arr[i].date !== prev && arr[i].danceClasses === danceClass) {
+               a.push(arr[i].date);
+               console.log(arr[i].start);
+               b.push(1);
+           } else {
+               b[b.length-1]++;
+           }
+           prev = arr[i].date;
+       }       
+       return [a, b];
+    }    
+  var result = calucateStudents(allclasses, 'Street');
+  console.log(result);
+
+
+var newoutput = '<h2>Dates</h2>';
+result[0].forEach(function(user){
+  console.log(user);
+  newoutput += `
+  <li>${user}</li>
+  `; 
+  document.getElementById('testing').innerHTML = newoutput;
+})
+
+  // for(var i= 0; i < result.length; i++){
+  //   console.log(result[0]++);
+  //   console.log('Date is: '+ result[0]+ '.'+ ' And Students are : ' + result[1]);
+  // }
+
 
 function removeDuplicates(arr, classes){
 
@@ -16,21 +50,9 @@ function removeDuplicates(arr, classes){
       if(arr[i].danceClasses === classes){
         var newArr = arr[i]; 
         unique_classes.push(newArr);
-        console.log(unique_classes.length);
+        console.log(unique_classes.danceClasses);
+      }      
 
-      }
-
-      var arr = [5, 5, 5, 2, 2, 2, 2, 2, 9, 4];
-      var counts = {};
-      
-      for (var i = 0; i < arr.length; i++) {
-       var num = arr[i];
-       counts[num] = counts[num] ? counts[num] + 1 : 1;
-      }
-      
-      console.log(counts[5], counts[2], counts[9], counts[4]);
-
-      
       //this function will remove duplicate dates
       for ( let i = 0; i < unique_classes.length; i++){
         if(unique_array.indexOf(unique_classes[i].date) == -1){
@@ -48,13 +70,14 @@ console.log(removeDuplicates(allclasses, 'Street'));
 
 
 let output = '<h2 class="mb-4">All Classes</h2>';
-  allclasses.forEach(function(user){
+  result.forEach(function(user){
+    console.log(user);
     output += `
     <table class="table">
       <tbody>
         <tr>
-          <td scope="row">${user.date}</td>
-          <td scope="row">${user.start}</td>
+          <td scope="row">${user}</td>
+
         </tr>
       </tbody>
     </table>
@@ -67,15 +90,15 @@ let output = '<h2 class="mb-4">All Classes</h2>';
 
 
 
-for(var i = 0; i < student.length; i++){
-  var count = 0;
-if(student[i].classes[i] === 'street'){
-console.log(student[i].classes[i]);
-}
+// for(var i = 0; i < student.length; i++){
+//   var count = 0;
+// if(student[i].classes[i] === 'street'){
+// console.log(student[i].classes[i]);
+// }
 
-}
+// }
 
-console.log(classes[0].dates.length);
+// console.log(classes[0].dates.length);
 
 var today = new Date();
 var dd = today.getDate();
@@ -89,9 +112,9 @@ if(mm<10) {
 }
 var todaysDate = yyyy + '-' + mm + '-'+ dd;
 
-var tango = classes.findIndex(x => x.name=="Tango");
-var dancehall = classes.findIndex(x => x.name=="Dancehall");
-var street = classes.findIndex(x => x.name=="Street");
+// var tango = classes.findIndex(x => x.name=="Tango");
+// var dancehall = classes.findIndex(x => x.name=="Dancehall");
+// var street = classes.findIndex(x => x.name=="Street");
 
 
 document.getElementById('street').innerHTML = classes[street].name ;
