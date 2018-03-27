@@ -25,32 +25,66 @@ console.log(allclasses);
  let tango = allclasses.filter((element) => element.danceClasses === 'Tango');
  let dancehall = allclasses.filter((element) => element.danceClasses === 'Dancehall');
 
+function time(index){
+  var output = ''; 
+  var prev;
+  index.forEach((element) => {    
+    if(element.date >= todaysDate && element.date !== prev){
+    output += `
+          <p>${element.start}</p> 
+          `
+          prev = element.date; 
+    }    
+  });
+  return output;
+}
+
+document.getElementById('street-time').innerHTML = time(streetdance);
+document.getElementById('tango-time').innerHTML = time(tango);
+document.getElementById('dancehall-time').innerHTML = time(dancehall);
+
+function instructor(index){
+  var output = ''; 
+  var prev;
+  index.forEach((element) => {    
+    if(element.date >= todaysDate && element.date !== prev){
+    output += `
+          <p>${element.tFname}</p> 
+          `
+          prev = element.date; 
+    }    
+  });
+  return output;
+}
+document.getElementById('street-instructor').innerHTML = instructor(streetdance);
+document.getElementById('tango-instructor').innerHTML = instructor(tango);
+document.getElementById('dancehall-instructor').innerHTML = instructor(dancehall);
 //this function will remove dubble and calucate total students per class.
     function calucateStudents(arr) {
        var a = [], b = [], prev;
       //  arr.sort();
        for ( var i = 0; i < arr.length; i++ ) {
-        console.log(arr[i]);
+
         allclasses.filter(function(element ){
-          console.log(element.danceClasses);
         })
            if (arr[i].date !== prev && arr[i].date >= todaysDate) {
-
+              //  console.log(arr[i]);
                a.push(arr[i].date);
                //console.log(arr[i]);
                b.push(1);
                //console.log(b);
            } else {
                b[b.length -1]++;
-               console.log(b);
+              //  console.log(b);
            }
            prev = arr[i].date;
        }
        return [a, b];
     }
-
+// console.log(calucateStudents(streetdance));
 //we are saving street, dancehall and tango objects below
   var streetObj = calucateStudents(streetdance);
+  // console.log(streetObj);
   var tangoObj = calucateStudents(tango);
   var dancehallObj = calucateStudents(dancehall);
 
