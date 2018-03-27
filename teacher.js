@@ -1,38 +1,49 @@
-fetch('http://localhost:3080/api/getallclasseswithname')
+fetch('http://localhost:3000/api/getallclasseswithname')
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
-    var allclasses = json; // all objects 
+    var allclasses = json; // all objects
     console.log(allclasses);
 
-//this function will remove dubble and calucate total students per class. 
+//this function will remove dubble and calucate total students per class.
     function calucateStudents(arr, danceClass) {
-       var a = [], b = [], prev;       
+       var a = [], b = [], prev;
        arr.sort();
-       for ( var i = 0; i < arr.length; i++ ) {   
+       for ( var i = 0; i < arr.length; i++ ) {
            if ( arr[i].date !== prev && arr[i].danceClasses === danceClass) {
+             //console.log(danceClass);
                a.push(arr[i].date);
                console.log(arr[i].start);
                b.push(1);
            } else {
-               b[b.length-1]++;
+               b[b.length -1]++;
+               console.log(b);
            }
            prev = arr[i].date;
-       }       
+       }
        return [a, b];
-    }    
+    }
   var result = calucateStudents(allclasses, 'Street');
   console.log(result);
 
 
-var newoutput = '<h2>Dates</h2>';
+var newoutput = '';
 result[0].forEach(function(user){
   console.log(user);
   newoutput += `
   <li>${user}</li>
-  `; 
-  document.getElementById('testing').innerHTML = newoutput;
+  `;
+  document.getElementById('street-dates').innerHTML = newoutput;
+})
+
+let students = '';
+result[1].forEach(function(user){
+  //console.log(user);
+  students += `
+  <li>${user}</li>
+  `;
+  document.getElementById('street-students').innerHTML = students;
 })
 
   // for(var i= 0; i < result.length; i++){
@@ -48,10 +59,10 @@ function removeDuplicates(arr, classes){
     //this will filter only one class
     for(let i = 0;i < arr.length; i++){
       if(arr[i].danceClasses === classes){
-        var newArr = arr[i]; 
+        var newArr = arr[i];
         unique_classes.push(newArr);
         console.log(unique_classes.danceClasses);
-      }      
+      }
 
       //this function will remove duplicate dates
       for ( let i = 0; i < unique_classes.length; i++){
@@ -59,7 +70,7 @@ function removeDuplicates(arr, classes){
           var uniq_dates = unique_classes[i].date;
           var uniq_time = unique_classes[i].danceClasses;
           unique_array.push(unique_classes[i].date)
-      } 
+      }
       }
 
     }
@@ -83,7 +94,7 @@ let output = '<h2 class="mb-4">All Classes</h2>';
     </table>
               `;
   });
-  document.getElementById('street-students').innerHTML = output;
+//  document.getElementById('street-students').innerHTML = output;
 })
 }
 });
