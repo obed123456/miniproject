@@ -1,92 +1,174 @@
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+if(dd<10) {
+    dd = '0'+dd
+}
+if(mm<10) {
+    mm = '0'+mm
+}
+//this is todaysdate
+var todaysDate = yyyy + '-' + mm + '-'+ dd;
+
 fetch('http://localhost:3080/api/getallclasseswithname')
 .then(function(response) {
   if(response.ok) {
     response.json()
   .then(function(json) {
-    var allclasses = json; // all objects 
-    console.log(allclasses);
+    var allclasses = json; // all objects
+console.log(allclasses);
+// we are filtering all classes.
+ let streetdance = allclasses.filter((element) => element.danceClasses === 'Street');
+ let tango = allclasses.filter((element) => element.danceClasses === 'Tango');
+ let dancehall = allclasses.filter((element) => element.danceClasses === 'Dancehall');
 
-//this function will remove dubble and calucate total students per class. 
-    function calucateStudents(arr, danceClass) {
-       var a = [], b = [], prev;       
-       arr.sort();
-       for ( var i = 0; i < arr.length; i++ ) {   
-           if ( arr[i].date !== prev && arr[i].danceClasses === danceClass) {
+//this function will remove dubble and calucate total students per class.
+    function calucateStudents(arr) {
+       var a = [], b = [], prev;
+      //  arr.sort();
+       for ( var i = 0; i < arr.length; i++ ) {
+        console.log(arr[i]);
+        allclasses.filter(function(element ){
+          console.log(element.danceClasses);
+        })
+           if (arr[i].date !== prev && arr[i].date >= todaysDate) {
                a.push(arr[i].date);
-               console.log(arr[i].start);
+               //console.log(arr[i]);
                b.push(1);
+               //console.log(b);
            } else {
                b[b.length-1]++;
            }
            prev = arr[i].date;
-       }       
+       }
        return [a, b];
-    }    
-  var result = calucateStudents(allclasses, 'Street');
-  console.log(result);
-
-
-var newoutput = '<h2>Dates</h2>';
-result[0].forEach(function(user){
-  console.log(user);
-  newoutput += `
-  <li>${user}</li>
-  `; 
-  document.getElementById('testing').innerHTML = newoutput;
-})
-
-  // for(var i= 0; i < result.length; i++){
-  //   console.log(result[0]++);
-  //   console.log('Date is: '+ result[0]+ '.'+ ' And Students are : ' + result[1]);
-  // }
-
-
-function removeDuplicates(arr, classes){
-
-    let unique_classes = [];
-    let unique_array = [];
-    //this will filter only one class
-    for(let i = 0;i < arr.length; i++){
-      if(arr[i].danceClasses === classes){
-        var newArr = arr[i]; 
-        unique_classes.push(newArr);
-        console.log(unique_classes.danceClasses);
-      }      
-
-      //this function will remove duplicate dates
-      for ( let i = 0; i < unique_classes.length; i++){
-        if(unique_array.indexOf(unique_classes[i].date) == -1){
-          var uniq_dates = unique_classes[i].date;
-          var uniq_time = unique_classes[i].danceClasses;
-          unique_array.push(unique_classes[i].date)
-      } 
-      }
-
     }
-    return unique_array
+
+//we are saving street, dancehall and tango objects below
+  var streetObj = calucateStudents(streetdance);
+  var tangoObj = calucateStudents(tango);
+  var dancehallObj = calucateStudents(dancehall);
+
+//this function we go through total students and print on screen
+function addStudentCount(index){
+  var studentCount = '';
+  index[1].forEach(function(user){
+    studentCount +=
+    `<p>${user}</p>`;
+  })
+  return studentCount;
+}
+//this function we go through all dates after filtering and write it on screen
+function addDates(index){
+  var dates = '';
+  index[0].forEach(function(user){
+    dates +=
+    `<p>${user}</p>`;
+  })
+  return dates;
 }
 
-console.log(removeDuplicates(allclasses, 'Street'));
+document.getElementById('tango-students').innerHTML= addStudentCount(tangoObj);
+document.getElementById('tango-dates').innerHTML = addDates(tangoObj);
 
+document.getElementById('street-students').innerHTML= addStudentCount(streetObj);
+document.getElementById('street-dates').innerHTML = addDates(streetObj);
 
-let output = '<h2 class="mb-4">All Classes</h2>';
-  result.forEach(function(user){
-    console.log(user);
-    output += `
-    <table class="table">
-      <tbody>
-        <tr>
-          <td scope="row">${user}</td>
+document.getElementById('dancehall-students').innerHTML = addStudentCount(dancehallObj);
+document.getElementById('dancehall-dates').innerHTML = addDates(dancehallObj);
 
-        </tr>
-      </tbody>
-    </table>
-              `;
-  });
-  document.getElementById('street-students').innerHTML = output;
 })
 }
+})
+
+/*
+var students = '';
+streetObj[1].forEach(function(user){
+  students +=
+  `<p>${user}</p>`;
+})
+var newoutput = '';
+streetObj[0].forEach(function(user){
+  newoutput +=
+  `<p>${user}</p>`
 });
+
+var studentstango = '';
+tangoObj[1].forEach (function(user){
+  studentstango +=
+  `<p>${user}</p>`;
+})
+
+var newoutputtango = '';
+tangoObj[0].forEach(function(user){
+  newoutputtango +=
+  `<p>${user}</p>`;
+})
+
+var studentsdancehall = '';
+dancehallObj[1].forEach (function(user){
+  studentsdancehall +=
+  `<p>${user}</p>`;
+})
+
+var newoutputdancehall = '';
+dancehallObj[0].forEach(function(user){
+  newoutputdancehall +=
+  `<p>${user}</p>`;
+})
+
+*/
+
+
+
+//
+// function removeDuplicates(arr, classes){
+//
+//     let unique_classes = [];
+//     let unique_array = [];
+//     //this will filter only one class
+//     for(let i = 0;i < arr.length; i++){
+//       if(arr[i].danceClasses === classes){
+//         var newArr = arr[i];
+//         unique_classes.push(newArr);
+//         console.log(unique_classes.danceClasses);
+//       }
+//
+//       //this function will remove duplicate dates
+//       for ( let i = 0; i < unique_classes.length; i++){
+//         if(unique_array.indexOf(unique_classes[i].date) == -1){
+//           var uniq_dates = unique_classes[i].date;
+//           var uniq_time = unique_classes[i].danceClasses;
+//           unique_array.push(unique_classes[i].date)
+//       }
+//       }
+//
+//     }
+//     return unique_array
+// }
+//
+// console.log(removeDuplicates(allclasses, 'Street'));
+//
+//
+// let output = '<h2 class="mb-4">All Classes</h2>';
+//   result.forEach(function(user){
+//     console.log(user);
+//     output += `
+//     <table class="table">
+//       <tbody>
+//         <tr>
+//           <td scope="row">${user}</td>
+//
+//         </tr>
+//       </tbody>
+//     </table>
+//               `;
+//   });
+//    document.getElementById('street-students').innerHTML = output;
+// })
+// }
+// });
 
 
 
@@ -100,116 +182,108 @@ let output = '<h2 class="mb-4">All Classes</h2>';
 
 // console.log(classes[0].dates.length);
 
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; //January is 0!
-var yyyy = today.getFullYear();
-if(dd<10) {
-    dd = '0'+dd
-}
-if(mm<10) {
-    mm = '0'+mm
-}
-var todaysDate = yyyy + '-' + mm + '-'+ dd;
+
 
 // var tango = classes.findIndex(x => x.name=="Tango");
 // var dancehall = classes.findIndex(x => x.name=="Dancehall");
 // var street = classes.findIndex(x => x.name=="Street");
 
 
-document.getElementById('street').innerHTML = classes[street].name ;
-document.getElementById('tango').innerHTML = classes[tango].name ;
-document.getElementById('dancehall').innerHTML = classes[dancehall].name ;
+// document.getElementById('street').innerHTML = classes[street].name ;
+// document.getElementById('tango').innerHTML = classes[tango].name ;
+// document.getElementById('dancehall').innerHTML = classes[dancehall].name ;
 
-var date = '<div>';2
+//var date = '<div>';2
 
 // classesOfdance.forEach(classdates => {
-  date += '<p>' + `${classes[street].start}` + '</p>';
+//  date += '<p>' + `${classes[street].start}` + '</p>';
   // <div>`${tango.start}`<div>
 // });
  // document.getElementById('street-li').innerHTML = date;
 
 
-console.log(classes[street].dates);
+//console.log(classes[street].dates);
 //this function is a exemple to sort all dates
 //only dates which are higher then or equal to day will show in the list
-function classDates(index, id) {
-  var items =  document.getElementById(id);
-  items.innerHTML = '';
-  var date1 = todaysDate;
-  console.log(date1);
-  var allDates = classes[index].dates;
-  console.log(allDates.length);
+// function classDates(index, id) {
+//   var items =  document.getElementById(id);
+//   items.innerHTML = '';
+//   var date1 = todaysDate;
+//   console.log(date1);
+//   var allDates = classes[index].dates;
+//   console.log(allDates.length);
+//
+//   for (var i = 0; i < allDates.length; i++) {
+//   allDates.sort();
+//   if(allDates[i] >= date1){
+//   // document.getElementById(pos).innerHTML = allDates[i];
+//
+//   var datesoutput = document.createElement('p');
+//   datesoutput.innerHTML = allDates[i];
+//   items.appendChild(datesoutput);
+//   }
+//   }
+// }
+// var TimeDuration = function (index, id) {
+//   let starttime = classes[index].start;
+//   document.getElementById(id).innerHTML = "Classes starts at: " + starttime;
+// }
+//
+// var totalDuration = function (index, id) {
+//   let total = classes[index].length;
+//   document.getElementById(id).innerHTML = "Total duration is : " + total;
+// }
+//
+// totalDuration(tango, 'tango-length');
+// totalDuration(street, 'street-length');
+// totalDuration(dancehall, 'dancehall-length');
+//
+// TimeDuration(tango, 'tango-time');
+// TimeDuration(street, 'street-time');
+// TimeDuration(dancehall, 'dancehall-time');
+//
+// classDates(street, 'street-dates');
+// classDates(tango, 'tango-dates');
+// classDates(dancehall, 'dancehall-dates');
+//
+//
+// let div;
+// let element;
+//
+// function studentCount(student, index) {
+//   for(var i = 0; i < student.length; i++) {
+//
+//     if(student[index].classes === 'street') {
+//       console.log('We found street');
+//     }
+//     else {
+//       console.log('fuck it');
+//     }
+//     document.getElementById(id) = student[index].length;
+//   }
+// }
 
-  for (var i = 0; i < allDates.length; i++) {
-  allDates.sort();
-  if(allDates[i] >= date1){
-  // document.getElementById(pos).innerHTML = allDates[i];
-
-  var datesoutput = document.createElement('p');
-  datesoutput.innerHTML = allDates[i];
-  items.appendChild(datesoutput);
-  }
-  }
-}
-var TimeDuration = function (index, id) {
-  let starttime = classes[index].start;
-  document.getElementById(id).innerHTML = "Classes starts at: " + starttime;
-}
-
-var totalDuration = function (index, id) {
-  let total = classes[index].length;
-  document.getElementById(id).innerHTML = "Total duration is : " + total;
-}
-
-totalDuration(tango, 'tango-length');
-totalDuration(street, 'street-length');
-totalDuration(dancehall, 'dancehall-length');
-
-TimeDuration(tango, 'tango-time');
-TimeDuration(street, 'street-time');
-TimeDuration(dancehall, 'dancehall-time');
-
-classDates(street, 'street-dates');
-classDates(tango, 'tango-dates');
-classDates(dancehall, 'dancehall-dates');
-
-
-let div;
-let element;
-
-function studentCount(student, index) {
-  for(var i = 0; i < student.length; i++) {
-
-    if(student[index].classes === 'street') {
-      console.log('We found street');
-    }
-    else {
-      console.log('fuck it');
-    }
-    // document.getElementById(id) = student[index].length;
-  }
-}
-
-student(tango);
-
+// student(tango);
+//
 // console.log(today.gettime());
-//save tango object here
-var tangoObj = classes[tango];
+// save tango object here
+// var tangoObj = classes[tango];
 // console.log(tangoObj);
 // console.log(tangoObj.start);
-//save dates of tango classes here
-var classesOfdance = tangoObj.dates;
-// console.log(classesOfdance);
-var str = '<ul>';
-var time = '<div>'
-var date = document.getElementById('dates');
-classesOfdance.forEach(classdates => {
+// save dates of tango classes here
+// var classesOfdance = tangoObj.dates;
+//  console.log(classesOfdance);
+// var str = '<ul>';
+// var time = '<div>'
+// var date = document.getElementById('dates');
+// classesOfdance.forEach(classdates => {
+//
+//   time += '<p>' + `${tangoObj.start}` + '</p>';
+//   date += '<p>' + `${tangoObj.start}` + '</p>';
+//   <div>`${tango.start}`<div>
+// });
 
-  time += '<p>' + `${tangoObj.start}` + '</p>';
-  date += '<p>' + `${tangoObj.start}` + '</p>';
-  // <div>`${tango.start}`<div>
-});
+
 // document.getElementById('dates').innerHTML = str;
 // document.getElementById('time').innerHTML = time;
 //loop through all dates in array of tango and then print in a list.
