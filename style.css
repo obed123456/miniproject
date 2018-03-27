@@ -5,11 +5,16 @@ body{
 
 a, a:link, a:visited{
   text-decoration: none;
-  color: grey;
+}
+.button {
+  border: none;
 }
 
+h1, h2, h3, h4, h5, h6, li {
+  font-family: 'Rajdhani', sans-serif;
+}
 
-header{
+header {
   width: 100vw;
   height: 100vh;
   background-image: url("tango.jpg");
@@ -17,41 +22,51 @@ header{
   background-repeat: no-repeat;
   background-color: #fff;
   /* display: flex; */
-}.
-.header-text{
+}
+
+.header-text {
 display: flex;
 height: 100vh;
-
 }
+
 .text-content-mid {
   text-align: center;
   justify-content: center;
   align-items: center;
-
 }
+
 .text-content {
   height: 100vh;
+  width: 100%;
   /* margin-top: 10%; */
-display: flex;
+  display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-
-  /* align-items: center; */
   color: white;
-  border: 1px solid red;
 }
+.text-content52 h1 {
+  font-size: 5em;
+  background-color: rgba(236, 91, 18, 0.5);
+  padding: 15px;
+}
+.text-content52 h2 {
+  font-size: 2em;
+  /* background-color: rgba(236, 91, 18, 0.5); */
+}
+
 .navbar{
   position: fixed;
   top: 0px;
   width: 60%;
-  height: 10%;
+  height: 60px;
   display: flex;
   background-color: #fff;
   z-index: 1;
   margin-left: 20%;
   text-align: center;
   justify-content: space-between;
+  background-color: rgba(236, 91, 18, 0.5);
 }
 
 .logo{
@@ -67,7 +82,9 @@ display: flex;
 
 .nav-links{
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2%;
   width: 80%;
 }
 
@@ -75,6 +92,10 @@ display: flex;
   display: inline;
   list-style: none;
   padding-left: 1em;
+}
+.nav-links a {
+  color: rgba(18, 236, 200);
+  font-size: 1.2em;
 }
 
 .content{
@@ -86,7 +107,6 @@ display: flex;
 }
 .box{
   width: 28%;
-  border: 1px solid red;
   padding: 13px;
 }
 #news ol li{
@@ -108,8 +128,11 @@ display: flex;
   color: red; /* or whatever color you prefer */
 }
 .login{
-  border-left: 1px solid lightgrey;
-  background-color: white;
+  background-color: rgba(236, 91, 18, 0.5);
+  border: none;
+  color: rgba(18, 236, 200);
+  font-family: 'Rajdhani';
+  font-size: 1.2em;
 }
 
 footer{
