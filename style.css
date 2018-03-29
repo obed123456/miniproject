@@ -25,8 +25,8 @@ header {
 }
 
 .header-text {
-display: flex;
-height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
 .text-content-mid {
