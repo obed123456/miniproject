@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Fetch from '../Fetch/Fetch';
 
 class News extends Component {
   render() {
@@ -6,14 +7,15 @@ class News extends Component {
       <section className="content">
         <div className="box" id="news">
           <h1>NEWS</h1>
-          <ol>
+          <ul><Fetch /></ul>
+          {/* <ol>
             <li>
               I motsättning till vad många tror, är inte Lorem Ipsum slumpvisa ord. Det har sina rötter i ett stycke klassiskt litteratur på latin från 45 år före år 0, och är alltså över 2000 år gammalt.
             </li>
             <li>
               Richard McClintock, en professor i latin på Hampden-Sydney College i Virginia, översatte ett av de mer ovanliga orden, consectetur, från ett stycke Lorem Ipsum och fann dess ursprung genom att studera användningen av dessa ord i klassisk litteratur.
             </li>
-          </ol>
+          </ol> */}
         </div>
         <div className="box">
         <h2>Today's lessons</h2><br />
