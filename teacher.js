@@ -14,7 +14,7 @@ var todaysDate = yyyy + '-' + mm + '-'+ dd;
 
 fetch('http://localhost:3080/api/getallclasseswithname')
 .then(function(response) {
-  if(response.ok) {
+  // if(response.ok) {
     response.json()
   .then(function(json) {
     var allclasses = json; // all objects
@@ -117,7 +117,7 @@ document.getElementById('dancehall-students').innerHTML = addStudentCount(danceh
 document.getElementById('dancehall-dates').innerHTML = addDates(dancehallObj);
 
 })
-}
+// }
 })
 
 /*
