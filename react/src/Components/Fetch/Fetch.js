@@ -11,7 +11,7 @@ class Fetch extends Component {
 componentDidMount() {
   console.log(this)
 
-  fetch('http://localhost:3001/api/getallclasseswithname')
+  fetch('http://localhost:3000/api/getallclasseswithname')
   .then((response) => {
     // if(response.ok) {
       response.json()
